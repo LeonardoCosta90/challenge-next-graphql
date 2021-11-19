@@ -4,8 +4,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import * as ormOptions from './config/orm'
+import RepoModule from './repo.module';
 @Module({
-  imports: [TypeOrmModule.forRoot(ormOptions)],
+  imports: [TypeOrmModule.forRoot(ormOptions), RepoModule],
   controllers: [AppController],
   providers: [AppService],
 })
