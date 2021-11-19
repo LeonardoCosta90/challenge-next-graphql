@@ -5,9 +5,6 @@ Code Challenge - NestJS + TypeORM + GraphQL
 <p align="center">Simple GraphQL API with NestJS in Back-end. React and Apollo Client for Front-end.</p>
 
 <p align="center">
-  <a href="https://github.com/Rocketseat/youtube-challenge-nestjs-graphql/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/rocketseat/youtube-challenge-nestjs-graphql?color=%237159c1&logoColor=%237159c1&style=flat" alt="Contributors">
-  </a>
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/github/license/rocketseat/youtube-challenge-nestjs-graphql?color=%237159c1&logo=mit" alt="License">
   </a>
