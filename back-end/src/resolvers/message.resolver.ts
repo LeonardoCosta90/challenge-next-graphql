@@ -11,7 +11,7 @@ import {
 import { PubSub } from 'graphql-subscriptions';
 import RepoService from '../repo.service';
 import Message from '../db/models/message.entity';
-import MessageInput, { DeleteMessageInput } from './input/message.input';
+import MessageInput from './input/message.input';
 import User from '../db/models/user.entity';
 import { context } from 'src/db/loaders';
 
@@ -46,33 +46,30 @@ export default class MessageResolver {
    ): Promise<Message> {
       const message = this.repoService.messageRepo.create({
          userId: input.userId,
-         content: input.content,
+         content: input.content
       });
 
-      const response = await this.repoService.messageRepo.save(message);
+      return await this.repoService.messageRepo.save(message);
 
-      pubSub.publish('messageAdded', { messageAdded: message });
-
-      return response;
    }
 
-   @Mutation(() => Message)
-   public async deleteMessage(
-      @Args('data') input: DeleteMessageInput,
-   ): Promise<Message> {
-      const message = await this.repoService.messageRepo.findOne(input.id);
+   // @Mutation(() => Message)
+   // public async deleteMessage(
+   //    @Args('data') input: DeleteMessageInput,
+   // ): Promise<Message> {
+   //    const message = await this.repoService.messageRepo.findOne(input.id);
 
-      if (!message || message.userId !== input.userId)
-         throw new Error(
-            'Message does not exists or you are not the message author',
-         );
+   //    if (!message || message.userId !== input.userId)
+   //       throw new Error(
+   //          'Message does not exists or you are not the message author',
+   //       );
 
-      const copy = { ...message };
+   //    const copy = { ...message };
 
-      await this.repoService.messageRepo.remove(message);
+   //    await this.repoService.messageRepo.remove(message);
 
-      return copy;
-   }
+   //    return copy;
+   // }
 
    @Subscription(() => Message)
    messageAdded() {
