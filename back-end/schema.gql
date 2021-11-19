@@ -9,7 +9,6 @@ scalar DateTime
 
 input DeleteMessageInput {
   id: Float!
-  userId: Float!
 }
 
 type Message {
@@ -28,8 +27,8 @@ input MessageInput {
 
 type Mutation {
   createOrLoginUser(data: UserInput!): User!
-  createMessage(data: MessageInput!): Message!
   deleteMessage(data: DeleteMessageInput!): Message!
+  createMessage(data: MessageInput!): Message!
 }
 
 type Query {

@@ -11,7 +11,7 @@ import {
 import { PubSub } from 'graphql-subscriptions';
 import RepoService from '../repo.service';
 import Message from '../db/models/message.entity';
-import MessageInput from './input/message.input';
+import MessageInput, { DeleteMessageInput } from './input/message.input';
 import User from '../db/models/user.entity';
 import { context } from 'src/db/loaders';
 
@@ -38,6 +38,25 @@ export default class MessageResolver {
    @Query(() => Message, { nullable: true })
    public async getMessage(@Args('id') id: number): Promise<Message> {
       return this.repoService.messageRepo.findOne(id);
+   }
+
+
+   @Mutation(() => Message)
+   public async deleteMessage(
+      @Args('data') input: DeleteMessageInput,
+   ): Promise<Message> {
+      const message = await this.repoService.messageRepo.findOne(input.id);
+
+      if (!message)
+         throw new Error(
+            'Message does not exists or you are not the message author',
+         );
+
+      const copy = { ...message };
+
+      await this.repoService.messageRepo.remove(message);
+
+      return copy;
    }
 
    @Mutation(() => Message)
