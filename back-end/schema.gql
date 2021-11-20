@@ -9,6 +9,7 @@ scalar DateTime
 
 input DeleteMessageInput {
   id: Float!
+  userId: Float!
 }
 
 type Message {

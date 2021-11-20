@@ -47,7 +47,7 @@ export default class MessageResolver {
    ): Promise<Message> {
       const message = await this.repoService.messageRepo.findOne(input.id);
 
-      if (!message)
+      if (!message || message.userId !== input.userId)
          throw new Error(
             'Message does not exists or you are not the message author',
          );
